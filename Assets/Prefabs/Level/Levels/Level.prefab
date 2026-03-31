@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4452881140830194790}
   - component: {fileID: 1636739793587002955}
   m_Layer: 0
-  m_Name: Level_Template
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

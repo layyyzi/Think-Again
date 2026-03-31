@@ -12,6 +12,9 @@ public class LevelManager : MonoBehaviour
     public TextMeshProUGUI hudLevelText;
     [Header("UI Елементи")]
     public GameObject nextLevelButton;
+    [Header("UI Тексти")]
+    public TextMeshProUGUI objectiveText; // Сюди перетягнеш текст завдання з GameHUDPanel
+    private string _currentHint;
 
     private GameObject _currentLevelInstance;
     private int _currentLevelIndex; // Тут ми будемо тримати номер поточного рівня
@@ -34,6 +37,22 @@ public class LevelManager : MonoBehaviour
         // 2. Створюємо новий рівень (врахуй, що масиви починаються з 0, а рівні з 1)
         GameObject prefabToSpawn = levelPrefabs[levelIndex - 1];
         _currentLevelInstance = Instantiate(prefabToSpawn, levelHolder);
+        
+        LevelData data = _currentLevelInstance.GetComponent<LevelData>();
+    
+        if (data != null)
+        {
+            // 1. Одразу виводимо завдання на екран
+            if (objectiveText != null) 
+                objectiveText.text = data.objectiveDescription;
+        
+            // 2. Ховаємо підказку в кишеню Менеджера
+            _currentHint = data.hintText;
+        }
+        else
+        {
+            Debug.LogWarning("На цьому рівні забули повісити скрипт LevelData!");
+        }
         
         hudLevelText.text = "Level " + levelIndex;
 
@@ -110,5 +129,21 @@ public class LevelManager : MonoBehaviour
 
         // Відкриваємо екран перемоги як ПОПАП (поверх HUD)
         FindAnyObjectByType<UIManager>().ShowPopup(FindAnyObjectByType<UIManager>().resultPanel);
+    }
+    
+    [Header("UI Панелі")]
+    public TextMeshProUGUI popupHintText; // Текст всередині твоєї HintPanel
+
+    // Цей метод викликатиме кнопка "?"
+    public void ShowHint()
+    {
+        // Вставляємо текст із "кишені" у вікно підказки
+        if (popupHintText != null)
+        {
+            popupHintText.text = _currentHint;
+        }
+
+        // Відкриваємо попап (ти вже писав цей метод для паузи)
+        FindAnyObjectByType<UIManager>().ShowPopup(FindAnyObjectByType<UIManager>().hintPanel); // Припустимо, ти додав hintPanel в UIManager
     }
 }

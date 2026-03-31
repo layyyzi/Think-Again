@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject gameHudPanel;
     public GameObject pauseMenuPanel;
     public GameObject resultPanel;
+    public GameObject hintPanel;
 
     
     private Stack<GameObject> _historyStack = new Stack<GameObject>();
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour
         gameHudPanel.SetActive(false);
         pauseMenuPanel.SetActive(false);
         resultPanel.SetActive(false);
+        hintPanel.SetActive(false);
         
         OpenRootScreen(mainMenuPanel);
     }
