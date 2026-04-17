@@ -17,10 +17,16 @@ public class LevelManager : MonoBehaviour
     
     private GameObject _currentLevelInstance;
     private int _currentLevelIndex;
+    private LevelData _currentLevelData;
     
     public Transform GetCurrentLevel()
     {
         return _currentLevelInstance != null ? _currentLevelInstance.transform : null;
+    }
+    
+    public LevelData GetCurrentLevelData()
+    {
+        return _currentLevelData != null ? _currentLevelData : null;
     }
     public void LoadLevel(int levelIndex)
     {
@@ -33,15 +39,15 @@ public class LevelManager : MonoBehaviour
         
         GameObject prefabToSpawn = levelPrefabs[levelIndex - 1];
         _currentLevelInstance = Instantiate(prefabToSpawn, levelHolder);
+        _currentLevelData = _currentLevelInstance.GetComponent<LevelData>();
         
-        LevelData data = _currentLevelInstance.GetComponent<LevelData>();
     
-        if (data != null)
+        if (_currentLevelData != null)
         {
-            if (objectiveText != null) 
-                objectiveText.text = data.objectiveDescription;
+            if (objectiveText != null)
+                objectiveText.text = _currentLevelData.objectiveDescription;
             
-            _currentHint = data.hintText;
+            _currentHint = _currentLevelData.hintText;
         }
         
         hudLevelText.text = "Level " + levelIndex;

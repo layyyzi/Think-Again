@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CraftingManager : MonoBehaviour
 {
     public static CraftingManager Instance { get; private set; }
-    public LevelManager level;
+    public LevelManager levelManager;
 
     [Header("База рецептів")]
     [SerializeField] private GameObject universalItemPrefab;
@@ -89,12 +90,20 @@ public class CraftingManager : MonoBehaviour
             return;
         }
         
-        GameObject newObj = Instantiate(universalItemPrefab, position, Quaternion.identity, level.GetCurrentLevel());
+        GameObject newObj = Instantiate(universalItemPrefab, position, Quaternion.identity, levelManager.GetCurrentLevel());
+        LevelData levelData = levelManager.GetCurrentLevelData();
         
         MergeableItem mergeable = newObj.GetComponent<MergeableItem>();
         if (mergeable != null)
         {
             mergeable.SetItemData(itemData);
+        }
+        
+        bool winObject = levelData.IsWinObject(itemData);
+
+        if (winObject)
+        {
+            UIManager.Instance.ShowPopup(UIManager.Instance.resultPanel);
         }
     }
 }

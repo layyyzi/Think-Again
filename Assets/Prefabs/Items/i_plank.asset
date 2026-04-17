@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: i_plank
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   ID: plank
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: -2413806693520163455, guid: d60bad7a5050ffa459b01fa882ac5737, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: i_wood
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   ID: wood
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 7482667652216324306, guid: 027dc0c7eac5643488a84416df754479, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: i_axe
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   ID: axe
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 7482667652216324306, guid: 13016c5a470b3e74ebff37340b748eac, type: 3}

@@ -10,4 +10,12 @@ public class LevelData : MonoBehaviour
     [Header("Підказка (для кнопки '?')")]
     [TextArea(3, 5)] 
     public string hintText = "Hint";
+    
+    [Header("Win Object")]
+    public ItemSO winObject;
+    
+    public bool IsWinObject(ItemSO item)
+    {
+        return item != null && winObject != null && item.ID == winObject.ID;
+    }
 }

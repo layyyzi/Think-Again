@@ -5,6 +5,7 @@
 public class MergeableItem : MonoBehaviour
 {
     public ItemSO itemData;
+    public bool destroyAfterMerge = true;
 
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
@@ -18,6 +19,16 @@ public class MergeableItem : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision)
     {
         MergeableItem otherItem = collision.gameObject.GetComponent<MergeableItem>();
+
+        if (otherItem != null)
+        {
+            MergeWith(otherItem);
+        }
+    }
+    
+    public void OnTriggerEnter2D(Collider2D otherCollider)
+    {
+        MergeableItem otherItem = otherCollider.gameObject.GetComponent<MergeableItem>();
 
         if (otherItem != null)
         {
@@ -56,7 +67,7 @@ public class MergeableItem : MonoBehaviour
                 
                 Destroy(otherItem.gameObject);
             }
-            Destroy(this.gameObject);
+            if (destroyAfterMerge) Destroy(this.gameObject);
         }
     }
     
